@@ -3,7 +3,7 @@ import Poruka from './components/Poruka'
 import axios from 'axios' //dodana komponenta
 
 const App = (props) => {
-  const [ poruke, postaviPoruke] = useState(props.poruke)
+  const [ poruke, postaviPoruke] = useState([])
   const [ unosPoruke, postaviUnos] = useState('unesi poruku...')
   const [ ispisSve, postaviIspis] = useState(true)
 
@@ -11,6 +11,12 @@ const App = (props) => {
   ? poruke
   : poruke.filter(poruka => poruka.vazno === true)
 
+  useEffect( () => {
+    axios.get("http://localhost:3001/api/poruke")
+    .then(res => postaviPoruke(res.data))
+  }, [])
+
+  /*
   const novaPoruka = (e) => {
     e.preventDefault()
     console.log('Klik', e.target)
@@ -22,7 +28,7 @@ const App = (props) => {
     }
     postaviPoruke(poruke.concat(noviObjekt))
     postaviUnos('')
-  }
+  }*/
 
   const promjenaUnosa = (e) => {
     console.log(e.target.value);
