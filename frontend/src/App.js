@@ -16,19 +16,22 @@ const App = (props) => {
     .then(res => postaviPoruke(res.data))
   }, [])
 
-  /*
+  //funkcija se poziva na klik te generira i sprema novu poruku
   const novaPoruka = (e) => {
     e.preventDefault()
     console.log('Klik', e.target)
     const noviObjekt = {
-      id: poruke.length + 1,
       sadrzaj: unosPoruke,
-      datum: new Date().toISOString(),
+      datum: new Date(),
       vazno: Math.random() > 0.5      
     }
-    postaviPoruke(poruke.concat(noviObjekt))
-    postaviUnos('')
-  }*/
+    axios
+      .post("http://localhost:3001/api/poruke", noviObjekt)
+      .then(res => {
+        postaviPoruke(poruke.concat(res.data))
+        postaviUnos('')
+      })
+  }
 
   const promjenaUnosa = (e) => {
     console.log(e.target.value);
