@@ -72,6 +72,15 @@ let poruke = [
     res.json(poruka)
   })
 
+  //PUT
+  app.put('/api/poruke/:id', (req, res) => {
+    const podatak = req.body
+    const id = Number(req.params.id)
+    console.log("Promjena vaznosti poruke sa ID", id)
+    poruke.map(p => p.id !== id ? p : podatak)
+    res.json(podatak)
+  })
+
   const generirajId = () => {
     const maxId = poruke.length > 0
       ? Math.max(...poruke.map(p => p.id))
