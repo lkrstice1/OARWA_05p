@@ -47,10 +47,13 @@ const App = (props) => {
           <Poruka key={p.id} poruka={p} />
         )}        
       </ul>
-      <form onSubmit={novaPoruka}>
+      {/*
+        <form onSubmit={novaPoruka}>
         <input value={unosPoruke} onChange={promjenaUnosa} />
         <button type='submit'>Spremi</button>
-      </form>
+        </form>
+        */}
+      
     </div>
   )
 }
