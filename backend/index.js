@@ -22,7 +22,8 @@ let poruke = [
   const app = express()
   app.use(cors())
   app.use(express.json())
-    
+  
+  //GET
   app.get('/', (req, res) =>{
     res.send('<h1>Pozdrav od Express servera!</h1>')
   })
@@ -42,6 +43,7 @@ let poruke = [
     }
   })
 
+  //DELETE
   app.delete('/api/poruke/:id', (req, res) => {
     const id = Number(req.params.id)
     poruke = poruke.filter(p => p.id !== id)
@@ -49,6 +51,7 @@ let poruke = [
     res.status(204).end()
   })
   
+  //POST
   app.post('/api/poruke', (req, res) => {
 
     const podatak = req.body
