@@ -37,6 +37,19 @@ const App = (props) => {
     console.log(e.target.value);
     postaviUnos(e.target.value)
   }
+
+  const promjenaVaznostiPoruke = (id) => {
+    const url = `http://localhost:3001/api/poruke/${id}`
+    const poruka = poruke.find(p => p.id === id)
+    const modPoruka = {
+      ...poruka,
+      vazno: !poruka.vazno
+    }
+    axios.put(url, modPoruka)
+      .then(response => {
+        postaviPoruke(poruke.map(p => p.id !== id ? p : response.data))
+      })
+  }
   return (
     <div>
       <h1>Poruke</h1>
@@ -47,7 +60,11 @@ const App = (props) => {
       </div>
       <ul>
         {porukeZaIspis.map(p =>
-          <Poruka key={p.id} poruka={p} />
+          <Poruka 
+          key={p.id} 
+          poruka={p} 
+          promjenaVaznosti={() => promjenaVaznostiPoruke(p.id)}
+          />
         )}        
       </ul>
       {/*
